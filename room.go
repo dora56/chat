@@ -27,6 +27,7 @@ func newRoom() *room {
 		join:    make(chan *client),
 		leave:   make(chan *client),
 		clients: make(map[*client]bool),
+		tracer:  trace.Off(),
 	}
 }
 
@@ -36,7 +37,7 @@ func (r *room) run() {
 		case client := <-r.join:
 			//参加
 			r.clients[client] = true
-			r.tracer.Trace("新しい新しいクライアントが参加しました")
+			r.tracer.Trace("新しいクライアントが参加しました")
 		case client := <-r.leave:
 			//退出
 			delete(r.clients, client)
