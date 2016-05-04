@@ -9,13 +9,13 @@ import (
 	"text/template"
 )
 
-type templateHendler struct {
+type templateHandler struct {
 	once     sync.Once
 	filename string
 	templ    *template.Template
 }
 
-func (t *templateHendler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	t.once.Do(func() {
 		t.templ =
 			template.Must(template.ParseFiles(filepath.Join("templates",
@@ -29,7 +29,8 @@ func main() {
 	flag.Parse() // フラグを解釈します。
 	r := newRoom()
 	//r.tracer = trace.New(os.Stdout)
-	http.Handle("/", &templateHendler{filename: "chat.html"})
+	http.Handle("/chat", MustAuth(&templateHandler{filename: "chat.html"}))
+	http.Handle("/login", &templateHandler{filename: "login.html"})
 	http.Handle("/room", r)
 	//チャットルームを開始します。
 	go r.run()
