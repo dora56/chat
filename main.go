@@ -2,13 +2,13 @@ package main
 
 import (
 	"flag"
+	"github.com/stretchr/gomniauth"
+	"github.com/stretchr/gomniauth/providers/facebook"
+	"github.com/stretchr/gomniauth/providers/github"
+	"github.com/stretchr/gomniauth/providers/google"
 	"log"
 	"net/http"
 	"path/filepath"
-	"src/github.com/stretchr/gomniauth"
-	"src/github.com/stretchr/gomniauth/providers/facebook"
-	"src/github.com/stretchr/gomniauth/providers/github"
-	"src/github.com/stretchr/gomniauth/providers/google"
 	"sync"
 	"text/template"
 )
