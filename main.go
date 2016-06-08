@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"github.com/joho/godotenv"
 	"github.com/stretchr/gomniauth"
 	"github.com/stretchr/gomniauth/providers/facebook"
 	"github.com/stretchr/gomniauth/providers/github"
@@ -35,17 +36,25 @@ func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	t.templ.Execute(w, data)
 }
+func getMyEnv() map[string]string {
+	env, err := godotenv.Read()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	return env
+}
 
 func main() {
 	var addr = flag.String("addr", ":8080", "アプリケーションのアドレス")
-	flag.Parse() // フラグを解釈します。
+	env := getMyEnv() //ローカル環境変数読み込み
+	flag.Parse()      // フラグを解釈します。
 	//Gomniauthのセットアップ
-	gomniauth.SetSecurityKey("zMsQ7B7FQneKKXTQKviECsjHjvA%RNKA")
+	gomniauth.SetSecurityKey(env["SEC_KEY"])
 	gomniauth.WithProviders(
 		facebook.New("クライアントID", "秘密の鍵", "http://localhost:8080/auth/callback/facebook"),
 		github.New("クライアントID", "秘密の鍵", "http://localhost:8080/auth/callback/github"),
-		google.New("1028664644457-5gr0979l96j6ku8a2lfrm3id2ph5dvo0.apps.googleusercontent.com",
-			"JXCqNsv0aWeh6p9jv81lCpcx", "http://localhost:8080/auth/callback/google"),
+		google.New(env["GOOGLE_CLIENT_ID"], env["GOOGLE_ACCESS_KEY"], "http://localhost:8080/auth/callback/google"),
 	)
 	r := newRoom()
 	//r.tracer = trace.New(os.Stdout)
