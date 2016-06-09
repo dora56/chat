@@ -11,7 +11,7 @@ func TestAuthAvatar(t *testing.T) {
 	}
 	// 値をセットします
 	testUrl := "http://url-to-avatar/"
-	client.userData = map[string]interface{}{"avater_ur;": testUrl}
+	client.userData = map[string]interface{}{"avatar_url": testUrl}
 	url, err = authAvatar.GetAvatarURL(client)
 	if err != nil {
 		t.Error("値が存在する場合、authAvatar.GetAvatarURLはエラーを返すべきではありません")
