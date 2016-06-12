@@ -1,11 +1,8 @@
 package main
 
 import (
-	"crypto/md5"
 	"errors"
 	"fmt"
-	"io"
-	"strings"
 )
 
 // ErrNoAvatarURLはAvatarインスタンスがアバターのURLを返すことが出来ない
