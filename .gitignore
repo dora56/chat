@@ -28,3 +28,5 @@ _testmain.go
 .env
 chat
 vendor
+avatars/**.png
+avatars/**.jpg
