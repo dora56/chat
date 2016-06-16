@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"fmt"
 )
 
 // ErrNoAvatarURLはAvatarインスタンスがアバターのURLを返すことが出来ない
@@ -37,7 +36,7 @@ var UseGravatar GravatarAvatar
 func (_ GravatarAvatar) GetAvatarURL(c *client) (string, error) {
 	if userid, ok := c.userData["userid"]; ok {
 		if useridStr, ok := userid.(string); ok {
-			return fmt.Sprintf("//www.gravatar.com/avatar/"+useridStr, nil)
+			return "//www.gravatar.com/avatar/" + useridStr, nil
 		}
 	}
 	return "", ErrNoAvatarURL
