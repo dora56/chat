@@ -3,13 +3,29 @@ package main
 import (
 	"crypto/md5"
 	"fmt"
-	"github.com/stretchr/gomniauth"
-	"github.com/stretchr/objx"
 	"io"
 	"log"
 	"net/http"
 	"strings"
+
+	"github.com/stretchr/gomniauth"
+	gonmiauthcommon "github.com/stretchr/gomniauth/common"
+	"github.com/stretchr/objx"
 )
+
+type CharUser interface {
+	UniqueID() string
+	AvatarURL() string
+}
+
+type charUser struct {
+	gonmiauthcommon.User
+	uniqueID string
+}
+
+func (u charUser) UniqueID() string {
+	return u.uniqueID
+}
 
 type authHandler struct {
 	next http.Handler
