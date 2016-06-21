@@ -13,17 +13,17 @@ import (
 	"github.com/stretchr/objx"
 )
 
-type CharUser interface {
+type ChatUser interface {
 	UniqueID() string
 	AvatarURL() string
 }
 
-type charUser struct {
+type chatUser struct {
 	gonmiauthcommon.User
 	uniqueID string
 }
 
-func (u charUser) UniqueID() string {
+func (u chatUser) UniqueID() string {
 	return u.uniqueID
 }
 
