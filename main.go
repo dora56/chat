@@ -15,6 +15,8 @@ import (
 	"text/template"
 )
 
+var avatars Avatar = UseFileSystemAvatar
+
 type templateHandler struct {
 	once     sync.Once
 	filename string

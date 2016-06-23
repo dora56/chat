@@ -23,10 +23,9 @@ type AuthAvatar struct{}
 var UserAuthAvatar AuthAvatar
 
 func (_ AuthAvatar) GetAvatarURL(u ChatUser) (string, error) {
-	if url, ok := c.userData["avatar_url"]; ok {
-		if urlStr, ok := url.(string); ok {
-			return urlStr, nil
-		}
+	url := u.AvatarURL()
+	if url != "" {
+		return url, nil
 	}
 	return "", ErrNoAvatarURL
 }
