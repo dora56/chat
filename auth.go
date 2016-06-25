@@ -11,7 +11,6 @@ import (
 	"github.com/stretchr/gomniauth"
 	gonmiauthcommon "github.com/stretchr/gomniauth/common"
 	"github.com/stretchr/objx"
-	"os/user"
 )
 
 type ChatUser interface {
