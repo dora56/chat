@@ -95,7 +95,6 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 			"userid":     chatUser.uniqueID,
 			"name":       user.Name(),
 			"avatar_url": avatarURL,
-			"email":      user.Email(),
 		}).MustBase64()
 		http.SetCookie(w, &http.Cookie{
 			Name:  "auth",
